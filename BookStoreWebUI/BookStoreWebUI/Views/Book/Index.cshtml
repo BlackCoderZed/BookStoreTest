@@ -1,0 +1,73 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@*<div class="row">
+    <div class="col-md-4">
+        <select class="form-select" id="Category" style="display:inline">
+            <option>
+                ALL
+            </option>
+            <option>
+                Technology
+            </option>
+        </select>
+    </div>
+    <div class="col-md-4">
+        <label for="Show" class="form-label">Show : </label>
+        <select class="form-select" id="Show" style="display:inline">
+            <option>
+                10
+            </option>
+            <option>
+                20
+            </option>
+        </select>
+    </div>
+    <div class="col-md-4">
+        <label for="Order" class="form-label">Order</label>
+        <select class="form-select" id="Order" style="display:inline">
+            <option>
+                Order by Title [A - Z]
+            </option>
+            <option>
+                Order by Title [Z - A]
+            </option>
+        </select>
+    </div>
+    <div class="col-md-6" >
+        <div class="input-group" style="align-items:end;">
+            <input type="text" class="form-control" />
+            <button class="btn btn-secondary">Search</button>
+        </div>
+        
+    </div>
+
+</div>*@
+<br />
+<div class="row">
+    <div class="col-md-12">
+        <table class="display nowrap" width="100%" id="tblBookList">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th>Title</th>
+                    <th>Category</th>
+                    <th>Author</th>
+                    @*<th>Price</th>
+                    <th></th>*@
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
+
+@section scripts{
+    <script>
+        booklist.Initialize();
+    </script>    
+}

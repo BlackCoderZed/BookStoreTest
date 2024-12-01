@@ -1,0 +1,36 @@
+﻿@model BookStoreWebUI.Models.Books.BookInfo
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div id="BookDetail">
+    <div class="row">
+        <div class="col-md-2">
+            <img src="@Model.ImageUrl" class="book-detail-image" />
+        </div>
+        <div class="col-md-6">
+            @Html.HiddenFor(model => model.Id)
+            <h3>@Model.Title</h3>
+            <p>@Model.Author, @Model.ReleaseDate.Value.ToString("dd/MM/yyyy")</p>
+            <p>@Model.Description</p>
+            <p class="text-danger">Item Left : @Model.Qty</p>
+            <br />
+
+            <b>Price : @String.Format("{0:N2}", Model.Price) MMK</b>
+            <div id="bookDetailAdd">
+                <div class="input-group">
+                    <input type="number" id="req_qty" class="form-control form-control-lg custom-form-control" value="1" max="@Model.Qty" min="1" />
+                    <button type="button" id="BT_AddToCart" class="btn btn-lg btn-primary"><i class="fa fa-cart-arrow-down"></i></button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+@section scripts{
+    <script>
+        bookDetail.Initialize();
+    </script>    
+}

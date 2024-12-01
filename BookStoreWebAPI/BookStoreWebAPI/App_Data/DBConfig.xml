@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<DBConfiguration>
+	<Server>127.0.0.1</Server>
+	<Database>BookStoreDB</Database>
+	<Username>sa</Username>
+	<Password>12345</Password>
+</DBConfiguration>
