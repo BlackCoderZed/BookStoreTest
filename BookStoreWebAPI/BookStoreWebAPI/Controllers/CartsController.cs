@@ -11,18 +11,20 @@ namespace BookStoreWebAPI.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
-    public class CartsController : BaseController
+    public class CartsController : ControllerBase
     {
-        public CartsController(IConfiguration configuration) : base(configuration)
+        private readonly CartServices _cartService;
+
+        public CartsController(CartServices cartService)
         {
+            _cartService = cartService;
         }
 
         [HttpPost]
         [Route("UpdateCart")]
         public IActionResult AddOrUpCart([FromBody] ReqAddCartInfo model)
         {
-            CartServices service = new CartServices();
-            ResAddCart response = service.AddOrUpdateCart(model);
+            ResAddCart response = _cartService.AddOrUpdateCart(model);
 
             return Ok(response);
         }
@@ -31,8 +33,7 @@ namespace BookStoreWebAPI.Controllers
         [Route("GetCart")]
         public IActionResult GetCart([FromQuery] ReqGetCart model)
         {
-            CartServices service = new CartServices();
-            ResGetCart response = service.GetCartInfo(model);
+            ResGetCart response = _cartService.GetCartInfo(model);
 
             return Ok(response);
         }
@@ -41,8 +42,7 @@ namespace BookStoreWebAPI.Controllers
         [Route("CheckOut")]
         public IActionResult CheckOut([FromBody] ReqCheckOut model)
         {
-            CartServices service = new CartServices();
-            ResCheckOut response = service.CheckOut(model);
+            ResCheckOut response = _cartService.CheckOut(model);
 
             return Ok(response);
         }

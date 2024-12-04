@@ -16,28 +16,6 @@ namespace BookStoreWebAPI.Controllers
             _config = configuration;
         }
 
-        protected string CreateJWTToken(string email)
-        {
-
-            // jwt
-            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["JWT:Key"]));
-            var cred = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
-            var claims = new[]
-            {
-                new Claim(ClaimTypes.Email, email)
-            };
-
-            var token = new JwtSecurityToken(
-                issuer: _config["JWT:Issuer"],
-                audience: _config["JWT:Audience"],
-                expires: DateTime.Now.AddMinutes(30),
-                claims: claims,
-                signingCredentials: cred
-               );
-
-            var jwt = new JwtSecurityTokenHandler().WriteToken(token);
-
-            return jwt;
-        }
+        
     }
 }

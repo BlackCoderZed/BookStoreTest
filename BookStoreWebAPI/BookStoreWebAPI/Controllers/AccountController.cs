@@ -9,23 +9,22 @@ namespace BookStoreWebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AccountController : BaseController
+    public class AccountController : ControllerBase
     {
-        public AccountController(IConfiguration configuration) : base(configuration)
+        private readonly AccountServices _accountService;
+        private readonly IConfiguration _configuration;
+
+        public AccountController(IConfiguration configuration, AccountServices accountService)
         {
+            _accountService = accountService;
+            _configuration = configuration;
         }
 
         [HttpPost]
         [Route("Login")]
         public IActionResult Login([FromBody] UserLoginInfo userLogin)
         {
-            AccountServices service = new AccountServices();
-            ResUserLogin result = service.Authentiate(userLogin);
-
-            if (result.Result.Code == Constants.ACK_RESULT)
-            {
-                result.AuthToken = CreateJWTToken(userLogin.Email);
-            }
+            ResUserLogin result = _accountService.Authentiate(userLogin, _configuration);
 
             return Ok(result);
         }

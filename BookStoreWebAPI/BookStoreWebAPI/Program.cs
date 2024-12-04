@@ -1,3 +1,4 @@
+using BookStoreWebAPI.Services;
 using BookStoreWebAPI.Utils;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
@@ -26,6 +27,10 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:Key"]))
         };
     });
+
+builder.Services.AddScoped<BookServices>();
+builder.Services.AddScoped<CartServices>();
+builder.Services.AddScoped<AccountServices>();
 
 DataAccessHelper.Initialize();
 

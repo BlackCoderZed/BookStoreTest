@@ -12,13 +12,19 @@ namespace BookStoreWebAPI.Controllers
     [Authorize]
     public class BooksController : ControllerBase
     {
+        private readonly BookServices _bookService;
+
+        public BooksController(BookServices bookService)
+        {
+            _bookService = bookService;
+        }
+
         [AllowAnonymous]
         [HttpGet]
         [Route("GetBooks")]
         public IActionResult GetBookList([FromQuery]BookFilterInfo filterInfo)
         {
-            BookServices services = new BookServices();
-            ResGetBookList response = services.GetBookList(filterInfo);
+            ResGetBookList response = _bookService.GetBookList(filterInfo);
 
             return Ok(response);
         }
@@ -28,8 +34,7 @@ namespace BookStoreWebAPI.Controllers
         [Route("Detail/{id}")]
         public IActionResult GetBook(int id)
         {
-            BookServices services = new BookServices();
-            ResGetBook response = services.GetBook(id);
+            ResGetBook response = _bookService.GetBook(id);
             
             return Ok(response);
         }
